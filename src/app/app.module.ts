@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
 import { LayoutComponent } from './pages/layout/layout.component';
+import { HomeComponent } from './pages/home/home.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { LayoutComponent } from './pages/layout/layout.component';
     AppComponent,
     LoginComponent,
     LayoutComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
