@@ -1,2 +1,36 @@
-<p>layout works!</p>
-<router-outlet></router-outlet>
+<nav class="navbar navbar-expand-sm ">
+  <div class="container-fluid">
+
+    <ul class="navbar-links">
+      <li class="navbar-dropdown">
+        <a routerLink="#">Home</a>
+      </li>
+      <li class="navbar-dropdown">
+        <a routerLink="Booking">Booking</a>
+      </li>
+      <li class="navbar-dropdown">
+        <a routerLink="#">client</a>
+      </li>
+      <li class="navbar-dropdown">
+        <a routerLink="#">Users</a>
+      </li>
+      <li class="navbar-dropdown">
+        <a routerLink="#">Rooms</a>
+      </li>
+    </ul>
+
+    <div class="search-container "  style="margin-left: 504px;">
+      <form action="/action_page.php">
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+    <a href="#" class="btn  btn-sm btn-outline-success">
+      <span class="glyphicon glyphicon-log-out">Log out</span>
+    </a>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <router-outlet></router-outlet>
+</div>
