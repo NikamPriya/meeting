@@ -1,6 +1,6 @@
 components
 1. packages
-2.booking
+2. booking
 3. user
 4. room
 5. clientPackage
