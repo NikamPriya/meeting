@@ -11,7 +11,7 @@ import { BookingComponent } from './pages/booking/booking.component';
 import { HomeComponent } from './pages/home/home.component';
 import { UserComponent } from './pages/user/user.component';
 import { RoomsComponent } from './pages/rooms/rooms.component';
-
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,8 @@ import { RoomsComponent } from './pages/rooms/rooms.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

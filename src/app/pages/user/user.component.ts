@@ -12,10 +12,12 @@ export class UserComponent implements OnInit{
   
   userList:Iuser[]=[]
   userObj:user=new user
-
+  displayStyle: string = 'none';
+  isCardView: boolean= true;
   constructor(private userSrv:UserService){}
   ngOnInit(): void {
     this.onGetAllUser();
+    this.onGetAllUsersByClientId();
   }
 
   onGetAllUser(){
@@ -27,6 +29,12 @@ export class UserComponent implements OnInit{
   onGetAllUsersByClientId(){
     this.userSrv.getAllUsersByClientId().subscribe((res:any)=>{
       this.userList = res.data;
+    })
+  }
+
+  onEdit(id:any){
+    this.userSrv.getEditUserById().subscribe((res:any)=>{
+      this.userList=res.data;
     })
   }
 
@@ -75,6 +83,15 @@ ondeleteUser(userId:number){
   }
 }
 
+
+openPopup() {
+  this.displayStyle = 'block';
+}
+closePopup() {
+  this.displayStyle = 'none'
+  
+  
+
 }
 
-
+}

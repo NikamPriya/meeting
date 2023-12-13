@@ -1,1 +1,152 @@
-<p>user works!</p>
+<div class="container-fluid">
+    <div class="row pt-3">
+        <div class="col-6 text-start">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">User</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-6 text-end">
+            <button class="btn btn-sm mx-3 text-light" style="background-color: rosybrown;"  (click)="isCardView = !isCardView">Toggle
+                View</button>
+            <button type="button" class="btn btn-sm text-light text-end" style="background-color:  rgb(136, 108, 127);"
+                data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"  (click)=" openPopup()"> New
+                User</button>
+        </div>
+    </div>
+
+    <div class="row gutters-sm">
+        <div class="col-3  mb-3" *ngFor="let user of userList" style="margin-right: -50px;">
+            <div class="card" style="width: 225px;">
+                <div class="card-body" *ngIf="isCardView">
+                    <div class="d-flex flex-column align-items-center text-center">
+                        <img src="../../../assets/user img.png" alt="Admin" class="rounded-circle" width="90">
+                        <div class="mt-3">
+                            <h5>{{user.userName}}</h5>
+                            <p class="text-secondary mb-1">{{user.clientName}}</p>
+                            <p class="text-muted font-size-sm">{{user.role}}</p>
+                            <button class="btn mx-2 btn-sm btn-secondary" (click)="onEdit(user)">Edit<i class="fa fa-pencil mx-1"
+                                    aria-hidden="true"></i></button>
+                            <button class="btn btn-sm btn-danger" (click)="ondeleteUser(user.userId)">Delete<i class="fa fa-ban mx-1"
+                                    aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fuid">
+        <div class="row m-4" *ngIf="! isCardView">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header text-center" style="background-color:rgb(236, 191, 191)">
+                        <b> User List</b>
+                    </div>
+                    <div class="card-body" >
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table table-bordered table-stripped">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr No</th>
+                                            <th>userName</th>
+                                            <th>userPassword</th>
+                                            <th>clientName</th>
+                                            <th>role</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of userList;let sr=index">
+                                            <td>{{sr+1}}</td>
+                                            <td>{{item.userName}}</td>
+                                            <td>{{item.userPassword }}</td>
+                                            <td>{{item.clientName}}</td>
+                                            <td>{{item.role}}</td>
+    
+                                            <td>
+                                                <button class="btn mx-2 btn-sm btn-secondary">Edit<i
+                                                        class="fa fa-pencil mx-1" aria-hidden="true"></i></button>
+                                                <button class="btn btn-sm btn-danger">Delete<i class="fa fa-ban mx-1"
+                                                        aria-hidden="true"></i></button>
+    
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="parent">
+        <div class="row">
+            <div class="col-12">
+                <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header"
+                                style=" padding-left: 175px; background-color:  rgb(185, 157, 175)">
+                                <h5 class="modal-title">Add New User</h5>
+                            </div>
+                            <form #userForm="ngForm">
+                                <div class="modal-body">
+                                    
+                                    <div class="row mx-2 ">
+                                        <div class="col-6 ">
+                                           <label>User Name</label>
+                                           <input class="form-control form-control-sm" [(ngModel)]="userObj.userName" name="userName">
+                                        </div>
+                                        <div class="col-6">
+                                        <label for="">Client Name</label>
+                                          <select class="form-control form-control-sm" [(ngModel)]="userObj.clientId">
+                                            <option value="Client Name">Client Name</option>
+                                            <!-- <option *ngFor="" [value]="item.clientId">{{item.clientName}}</option> -->
+                                          </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mx-2 pt-3">
+                                        <div class="col-6">
+                                            <label>User Password</label>
+                                            <input class="form-control form-control-sm"  [(ngModel)]="userObj.userPassword" name="userPassword">
+                                        </div>
+                                        <div class="col-6">
+                                            <label>Role</label>
+                                            <select class="form-control form-control-sm"  [(ngModel)]="userObj.role" name="">
+                                                <option value="Select Role">Select Role</option>
+                                                <option value="Client">Client</option>
+                                                <option value="ClientEmployee">Client  Employee</option>
+                                            </select>
+                                        </div>
+                                    </div>
+    
+                               
+                                <div class="modal-footer mt-3" style="padding-right: 160px;">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button type="button" class="btn btn-sm btn-secondary"
+                                                (click)="closePopup()">Close <i class="fa fa-times mx" aria-hidden="true"></i></button>
+                                            <button class="btn btn-sm btn-success mx-3"
+                                                (click)="saveAllUser();closePopup()"
+                                                [disabled]="userForm.invalid"
+                                                *ngIf="userObj.userId==0">Save <i class="fa fa-floppy-o mx" aria-hidden="true"></i></button>
+                                            <button class="btn btn-sm btn-success mx-3"
+                                                (click)="onUpsateUser();closePopup()"
+                                                *ngIf="userObj.userId!=0">Update</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
