@@ -58,7 +58,7 @@ body {
 
  
 h6 {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .card .card-block p {
@@ -105,6 +105,9 @@ p {
 
 .f-w-600 {
     font-weight: 600;
+}
+.col-9{
+    padding-right: 0px;
 }
 
 /* .m-b-20 {
