@@ -7,6 +7,8 @@ import { Iuser } from 'src/app/core/models/interfaces/Iuser';
 import { ClientService } from 'src/app/core/services/client.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
+import { ToggleService } from 'src/app/core/services/toggle.service';
 
 @Component({
   selector: 'app-user',
@@ -23,9 +25,16 @@ export class UserComponent implements OnInit {
   loggedinuserdata: any;
   isSpinner: boolean = false;
   isLoading:boolean = true;
-  // messages: Message[] | undefined;
+  isToggled = false;
+  ListView: boolean = true;
+ 
+  private subscription: Subscription = new Subscription;
 
-  constructor(private userSrv: UserService, private clientSrv: ClientService,private toastr:ToastrService) {
+
+  constructor(private userSrv: UserService, private clientSrv: ClientService,private toastr:ToastrService,private togglesrv: ToggleService,) {
+    this.subscription = this.togglesrv.toggleSubject.subscribe(() => {
+      this.isToggled = !this.isToggled;
+    });
     setTimeout(() => {
       this.isLoading = false;
     }, 2000);
@@ -136,9 +145,10 @@ export class UserComponent implements OnInit {
   closePopup() {
     this.displayStyle = 'none';
     this.userObj = new user()
+  }
 
-
-
+  onView() {
+    this.ListView = !this.ListView
   }
 
 }
