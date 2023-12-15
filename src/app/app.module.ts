@@ -17,6 +17,11 @@ import { MessagesModule } from 'primeng/messages';
 import { LoaderComponent } from './pages/loader/loader.component';
 import { TableModule } from 'primeng/table';
 import { ToastrModule } from 'ngx-toastr';
+import { ToggleDirective } from './shared/directives/toggle.directive';
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +33,7 @@ import { ToastrModule } from 'ngx-toastr';
     UserComponent,
     RoomsComponent,
     LoaderComponent,
+    ToggleDirective,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +49,7 @@ import { ToastrModule } from 'ngx-toastr';
       preventDuplicates: true,
       closeButton: true
     })
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

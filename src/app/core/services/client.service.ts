@@ -29,7 +29,7 @@ return this.http.get<Iclient[]>(APIConstant.client.getClient)
   }
 
   onDelete(id:number): Observable<Iclient[]>{
-    return this.http.post<Iclient[]>(APIConstant.client.delClient, id)
+    return this.http.post<Iclient[]>(APIConstant.client.delClient + id, {})
   }
 
 }

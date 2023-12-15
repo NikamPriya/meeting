@@ -1,0 +1,239 @@
+<div class="page-content page-container-" id="page-content">
+    <div class="container-fluid">
+        <div class="row  pt-5 ">
+            <div class="col-6">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Client</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="col-6 text-end ">
+                <button type="button" class="btn btn-sm  text-light" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal" data-bs-whatever="@mdo" style="background-color: #f29263;"
+                    (click)="openPopup()">Add
+                    New Client</button>
+            </div>
+        </div>
+        <div class="row " *ngIf="!isToggled">
+            <div class="col-md-3 mt-1 " *ngFor="let data of clientList" >
+                <div class="card user-card-full" >
+                    <div class="row  " >
+                        <div class="col-3 bg-c-lite-green user-profile ">
+                            <div class="card-block text-center text-white">
+                                <div class="m-b-25">
+                                    <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius"
+                                        alt="User-Profile-Image">
+                                </div>
+                                <h6 class="f-w-600">{{data.clientName | titlecase}}</h6>
+                                <!-- <p>Web Designer</p> -->
+                                <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-block">
+                                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">{{data.companyName | titlecase}}</h6>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p class="m-b-10 f-w-600">Address</p>
+                                        <h6 class="text-muted f-w-400">{{data.address}}</h6>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="m-b-10 f-w-600">Mobile No</p>
+                                        <h6 class="text-muted f-w-400">{{data.contactNo}}</h6>
+                                    </div>
+                                </div>
+                                <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600"></h6>
+                                <div class="row">
+                                    <div class="col-6 mb-1 text-start">
+                                        <button class="btn mx-3 btn-sm btn-secondary"
+                                            (click)="editClientData(data); openPopup()">Edit</button>
+                                        </div>
+                                    <div class="col-6 ">
+                                        <button class="btn btn-sm btn-danger"
+                                            (click)="DeleteClientData(data.clientId)">Delete></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row p-4" style="align-items: center;" *ngIf="isToggled">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header text-center ">
+                    <b> Client List</b>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>Sr No</th>
+                                <th>Client Name</th>
+                                <th>Company Name</th>
+                                <th>Address</th>
+                                <th>Contact No</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of clientList;let sr=index">
+                                <td>{{sr+1}}</td>
+                                <td>{{data.clientName | titlecase}}</td>
+                                <td>{{data.companyName | titlecase}}</td>
+                                <td>{{data.address}}</td>
+                                <td>{{data.contactNo}}</td>
+                                <td>
+                                    <button class="btn mx-3 btn-sm btn-secondary"
+                                        (click)="editClientData(data); openPopup()">Edit<i class="fa fa-pencil mx-1"
+                                            aria-hidden="true"></i></button>
+                                    <button class="btn btn-sm btn-danger"
+                                        (click)="DeleteClientData(data.clientId)">Delete<i class="fa fa-ban mx-1"
+                                            aria-hidden="true"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="parent">
+    <div class="row">
+        <div class="col-12  pt-3 ">
+            <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header" style="padding-left: 150px">
+                            <h4 class="modal-title text-center">Add Client</h4>
+                        </div>
+                        <form #userForm="ngForm">
+
+                            <div class="modal-body">
+                                <div class="row mx-2 ">
+                                    <div class="col-6 ">
+                                        <label>Client Name <span class="text-danger">*</span></label>
+                                        <input type="text" #clientName="ngModel" required
+                                            [(ngModel)]="clientObj.clientName" class="form-control form-control-sm"
+                                            name="clientName">
+                                        <div class="text-danger" *ngIf="clientName.touched || clientName.dirty">
+                                            <span *ngIf="clientName.errors?.['required']">Required Field</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-6">
+                                        <label>Company Name <span class="text-danger">*</span></label>
+                                        <input type="text" #companyName="ngModel" required
+                                            [(ngModel)]="clientObj.companyName" class="form-control  form-control-sm"
+                                            name="companyName">
+                                        <div class="text-danger" *ngIf="companyName.touched || companyName.dirty">
+                                            <span *ngIf="companyName.errors?.['required']">Required Field</span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-4">
+                                    <label>Model Number</label>
+                                    <input type="number" [(ngModel)]="clientObj.productShortName" class="form-control">
+                                </div> -->
+                                </div>
+                                <div class="row mx-2 pt-3">
+                                    <div class="col-12">
+                                        <label>Address <span class="text-danger">*</span></label>
+                                        <textarea rows="2" type="text" #address="ngModel" required
+                                            [(ngModel)]="clientObj.address" class="form-control form-control-sm"
+                                            name="address"></textarea>
+                                        <div class="text-danger" *ngIf="address.touched || address.dirty">
+                                            <span *ngIf="address.errors?.['required']">Required Field</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row mx-2 pt-3">
+                                    <div class="col-4">
+                                        <label>City <span class="text-danger">*</span></label>
+                                        <input type="text" #city="ngModel" required [(ngModel)]="clientObj.city"
+                                            class="form-control form-control-sm" name="city">
+                                        <div class="text-danger" *ngIf="city.touched || city.dirty">
+                                            <span *ngIf="city.errors?.['required']">Required Field</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <label>Pin Code <span class="text-danger">*</span></label>
+                                        <input type="text" #pincode="ngModel" required [(ngModel)]="clientObj.pincode"
+                                            class="form-control form-control-sm" name="pincode">
+                                        <div class="text-danger" *ngIf="pincode.touched || pincode.dirty">
+                                            <span *ngIf="pincode.errors?.['required']">Required Field</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <label>State <span class="text-danger">*</span></label>
+                                        <input type="text" #state="ngModel" required [(ngModel)]="clientObj.state"
+                                            class="form-control form-control-sm" name="state">
+                                        <div class="text-danger" *ngIf="state.touched || state.dirty">
+                                            <span *ngIf="state.errors?.['required']">Required Field</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row mx-2 pt-3">
+                                    <div class="col-4">
+                                        <label>Emp Strength <span class="text-danger">*</span></label>
+                                        <input type="text" #employeeStrength="ngModel" required
+                                            [(ngModel)]="clientObj.employeeStrength"
+                                            class="form-control form-control-sm" name="employeeStrength">
+                                        <div class="text-danger"
+                                            *ngIf="employeeStrength.touched || employeeStrength.dirty">
+                                            <span *ngIf="employeeStrength.errors?.['required']">Required Field</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <label>GST No. <span class="text-danger">*</span></label>
+                                        <input type="text" #gstNo="ngModel" required [(ngModel)]="clientObj.gstNo"
+                                            class="form-control form-control-sm" name="gstNo">
+                                        <div class="text-danger" *ngIf="gstNo.touched || gstNo.dirty">
+                                            <span *ngIf="gstNo.errors?.['required']">Required Field</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <label>Contact No <span class="text-danger">*</span></label>
+                                        <input type="text" #contactNo="ngModel" required
+                                            [(ngModel)]="clientObj.contactNo" class="form-control form-control-sm"
+                                            name="contactNo">
+                                        <div class="text-danger" *ngIf="contactNo.touched || contactNo.dirty">
+                                            <span *ngIf="contactNo.errors?.['required']">Required Field</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer" style="padding-right: 150px;">
+                                <button type="button" class="btn btn-secondary   btn-sm"  (click)="closePopup()"> Close
+                                    <i class="fa fa-times mx" aria-hidden="true"></i></button>
+                                <button class="btn  mx-3 btn-success btn-sm" *ngIf="clientObj.clientId==0"
+                                    [disabled]="userForm.invalid" (click)="saveClientData();closePopup()">Save 
+                                    <i class="fa fa-floppy-o mx" aria-hidden="true"></i></button>
+                                    
+                                <button class="btn btn-sm  btn-success  mx-3" *ngIf="clientObj.clientId !=0"
+                                    (click)="updateClientData(); closePopup()">Update 
+                                    <i class="fa fa-floppy-o mx" aria-hidden="true"></i></button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
