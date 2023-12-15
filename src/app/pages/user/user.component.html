@@ -13,7 +13,7 @@
             <!-- <button class="btn btn-sm mx-3 text-light" style="background-color: rosybrown;"
                 (click)="isCardView = !isCardView">Toggle
                 View</button> -->
-            <button type="button" class="btn btn-sm text-light text-end" style="background-color:  rgb(136, 108, 127);"
+            <button type="button" class="btn btn-sm text-light text-end" style="background-color: #f29263;;"
                 data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" (click)=" openPopup()">
                 New
                 User</button>
@@ -46,13 +46,13 @@
         <div class="row" *ngIf=" isToggled; ">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header text-center" style="background-color:rgb(236, 191, 191)">
+                    <div class="card-header text-center" style="background-color:#ebb59a;;">
                         <b> User List</b>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
-                                <table class="table table-bordered table-stripped">
+                                <table class="table table-bordered table-stripped table-striped">
                                     <thead>
                                         <tr>
                                             <th>Sr No</th>
@@ -97,7 +97,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header"
-                                style=" padding-left: 175px; background-color:  rgb(185, 157, 175)">
+                                style=" padding-left: 175px; background-color:  #ebb59a;">
                                 <h5 class="modal-title">Add New User</h5>
                             </div>
                             <form #userForm="ngForm">
