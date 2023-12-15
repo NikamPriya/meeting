@@ -1,4 +1,6 @@
-<div class="page-content page-container-" id="page-content">
+<app-loader *ngIf="isLoading"></app-loader>
+
+<div class="page-content page-container- " id="page-content" *ngIf="!isLoading">
     <div class="container-fluid">
         <div class="row  pt-5 ">
             <div class="col-6">
@@ -37,11 +39,11 @@
                                 <div class="row">
                                     <div class="col-sm-5">
                                         <p class="m-b-10 f-w-600">Address</p>
-                                        <h6 class="text-muted f-w-400">{{data.address}}</h6>
+                                        <h6 class="text-muted f-w-500">{{data.address}}</h6>
                                     </div>
                                     <div class="col-sm-7">
                                         <p class="m-b-10 f-w-600">Mobile No</p>
-                                        <h6 class="text-muted f-w-400">{{data.contactNo}}</h6>
+                                        <h6 class="text-muted f-w-500">{{data.contactNo}}</h6>
                                     </div>
                                 </div>
                                 <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600"></h6>
@@ -51,7 +53,7 @@
                                             (click)="editClientData(data); openPopup()">Edit<i class="fa fa-pencil mx-1"
                                             aria-hidden="true"></i></button>
                                         </div>
-                                    <div class="col-6 ">
+                                    <div class="col-6 text-start">
                                         <button class="btn btn-sm btn-danger"
                                             (click)="DeleteClientData(data.clientId)">Delete<i class="fa fa-ban mx-1"
                                             aria-hidden="true"></i>
@@ -69,7 +71,7 @@
     <div class="row p-4" style="align-items: center;" *ngIf="isToggled">
         <div class="col-12">
             <div class="card">
-                <div class="card-header text-center ">
+                <div class="card-header text-center " style="background-color: #ebb59a;">
                     <b> Client List</b>
                 </div>
                 <div class="card-body">
@@ -114,8 +116,8 @@
             <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <div class="modal-header" style="padding-left: 150px">
-                            <h4 class="modal-title text-center">Add Client</h4>
+                        <div class="modal-header" style="padding-left: 150px; background-color: #ebb59a;">
+                            <h5 class="modal-title text-center">Add Client</h5>
                         </div>
                         <form #userForm="ngForm">
                             <div class="modal-body">
@@ -215,7 +217,7 @@
                             <div class="modal-footer" style="padding-right: 150px;">
                                 <button type="button" class="btn btn-secondary   btn-sm"  (click)="closePopup()"> Close
                                     <i class="fa fa-times mx" aria-hidden="true"></i></button>
-                                <button class="btn  mx-3 btn-success btn-sm" *ngIf="clientObj.clientId==0"
+                                <button class="btn  mx-3 btn-success btn-sm" *ngIf="clientObj.clientId==0;isLoading"
                                     [disabled]="userForm.invalid" (click)="saveClientData();closePopup()">Save 
                                     <i class="fa fa-floppy-o mx" aria-hidden="true"></i></button>
                                     

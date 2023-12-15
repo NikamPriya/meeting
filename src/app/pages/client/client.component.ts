@@ -23,6 +23,8 @@ export class ClientComponent implements OnInit {
   displyModal: boolean = false;
 
   isToggled = false;
+  isLoading:boolean = true;
+
   private subscription: Subscription = new Subscription;
 
 
@@ -31,6 +33,10 @@ export class ClientComponent implements OnInit {
     this.subscription = this.togglesrv.toggleSubject.subscribe(() => {
       this.isToggled = !this.isToggled;
     });
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2000);
+
   }
 
   ngOnInit(): void {
@@ -55,7 +61,9 @@ export class ClientComponent implements OnInit {
 
 
   saveClientData() {
+    this.isLoading = true;
     this.clientSrv.saveClient(this.clientObj).subscribe((res: any) => {
+      this.isLoading = false;
       if (res.result) {
         alert(" New Client Created Successfully")
         this.getAllClients();
