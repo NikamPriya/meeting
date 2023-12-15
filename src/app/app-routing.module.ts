@@ -21,13 +21,15 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path:'Booking',
-        component:BookingComponent,
-      },
-      {
         path: 'home',
         component: HomeComponent
       },
+    
+      {
+        path:'Booking',
+        component:BookingComponent,
+      },
+      
       {
         path: 'client',
         component: ClientComponent

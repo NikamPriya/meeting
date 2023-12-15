@@ -1,9 +1,11 @@
 import { JsonPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { client } from 'src/app/core/models/classes/client';
 import { Iclient } from 'src/app/core/models/interfaces/Iclient';
 import { ClientService } from 'src/app/core/services/client.service';
-
+import { ToggleService } from 'src/app/core/services/toggle.service';
+import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-client',
   templateUrl: './client.component.html',
@@ -13,23 +15,44 @@ export class ClientComponent implements OnInit {
   clientObj: client = new client;
   clientList: Iclient[] = [];
 
-  constructor(private clientSrv: ClientService) { }
 
-  ngOnInit(): void {
+  isCardView: boolean = true;
+  ListView: boolean = true;
 
+  displayStyle: string = "none";
+  displyModal: boolean = false;
+
+  isToggled = false;
+  private subscription: Subscription = new Subscription;
+
+
+
+  constructor(private clientSrv: ClientService, private togglesrv: ToggleService, private toastrsrv: ToastrService) {
+    this.subscription = this.togglesrv.toggleSubject.subscribe(() => {
+      this.isToggled = !this.isToggled;
+    });
   }
 
+  ngOnInit(): void {
+    this.getAllClients();
+
+  }
   getAllClients() {
     this.clientSrv.getAllClient().subscribe((res: any) => {
       this.clientList = res.data;
 
     })
   }
-  editClientData(id: number) {
-    this.clientSrv.editCli(id).subscribe((res: any) => {
-      this.clientList = res.data;
-    })
+  // editClientData(clientId: number) {
+  //   this.clientSrv.editCli(clientId).subscribe((res: any) => {
+  //     this.clientList = res.data;
+  //   })
+  // }
+  editClientData(item: any) {
+    debugger
+    this.clientObj = item;
   }
+
 
   saveClientData() {
     this.clientSrv.saveClient(this.clientObj).subscribe((res: any) => {
@@ -59,10 +82,10 @@ export class ClientComponent implements OnInit {
       })
   }
 
-  DeleteClientData(id: number) {
-    const isConfirm = confirm(" Are you want to delete client data");
-    if (isConfirm) {
-      this.clientSrv.onDelete(id).subscribe((res: any) => {
+  DeleteClientData(clientId: number) {
+    const isDelete = confirm(" Are you want to delete client data");
+    if (isDelete == true) {
+      this.clientSrv.onDelete(clientId).subscribe((res: any) => {
         if (res.result) {
           alert("Client Deleted Successfully")
           this.getAllClients();
@@ -75,5 +98,18 @@ export class ClientComponent implements OnInit {
         })
     }
   }
+
+  openPopup() {
+    this.displayStyle = "block";
+  }
+  closePopup() {
+    this.displayStyle = "none";
+    this.clientObj = new client;
+  }
+  onView() {
+    this.ListView = !this.ListView
+  }
+
+
 
 }

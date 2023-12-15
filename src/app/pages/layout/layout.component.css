@@ -1,5 +1,5 @@
-* {
-  /* padding: 0; */
+/* /* * {
+  padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
@@ -71,7 +71,7 @@ body {
   transform: translateY(50px);
   left: 0;
   width: 250px;
-  /* background-color: #fff; */
+  background-color: #fff;
   box-shadow: 0px 10px 10px 3px rgba(0, 0, 0, 0.3);
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
@@ -90,7 +90,7 @@ body {
   color: #a451b5;
 }
 
-/* .header {
+.header {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -100,8 +100,8 @@ body {
   background-image: url("http://lorempixel.com/1366/698/food/");
   background-size: cover;
 } */
-/*
-.header-inner {
+
+/* .header-inner {
   text-align: center;
   color: #ff3f34;
   text-shadow: 0px 10px 10px rgba(0, 0, 0, .8);
@@ -120,17 +120,48 @@ body {
   border-radius: 27px;
   box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.3);
   z-index: 11;
-} */
-/* .header-inner form input[type="search"]:focus {
+}
+.header-inner form input[type="search"]:focus {
   outline: none;
 }
 
 .header-inner form input[type="search"]:focus + div {
   z-index: 1;
   opacity: 1;
-} */
+}
 
 ::placeholder {
   color: #666;
   font-weight: 400;
+}
+
+.btn {
+  min-width: 80px;
+}   */
+nav{
+  height: 100%;
+}
+.side-nav-button{
+  display :flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.side-nav-button:hover{
+  background-color: grey;
+border-radius: 30%;
+}
+
+.navbar{
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  height: 3rem;
+  z-index: 2;
+} 
+.form-control:focus {
+  outline: 0 !important;
+  border-color: initial;
+  box-shadow: none;
 }

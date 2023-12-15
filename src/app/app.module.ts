@@ -12,6 +12,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { ClientComponent } from './pages/client/client.component';
 import { UserComponent } from './pages/user/user.component';
 import { RoomsComponent } from './pages/rooms/rooms.component';
+import { ToggleDirective } from './shared/directives/toggle.directive';
+import { ToastrModule } from 'ngx-toastr';
+
 
 
 @NgModule({
@@ -24,12 +27,15 @@ import { RoomsComponent } from './pages/rooms/rooms.component';
     ClientComponent,
     UserComponent,
     RoomsComponent,
+    ToggleDirective,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot({timeOut:20000, positionClass: 'toast-top', preventDuplicates: true,
+    closeButton: true})
   ],
   providers: [],
   bootstrap: [AppComponent]
