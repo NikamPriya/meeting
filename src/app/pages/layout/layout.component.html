@@ -50,14 +50,14 @@
   <!-- <div class="navbar-collapse">
       <ul class="navbar-nav me-auto"></ul>
   </div> -->
-  <div class="search-container  " style="padding-left: 350px;" >
+  <div class="search-container  " style="padding-left: 400px;" >
     <form action="/action_page.php d-flex">
       <input type="text" placeholder="Search.." name="search">
       <button type="button"><i class="fa fa-search"></i></button>
-      <button class="btn btn-sm btn-outline-success rounded-pill" (click)="toggle(); onView()">{{ListView ? "Card view": "List View"}}</button>
+      <button class="btn btn-sm btn-outline-success rounded-pill ms-2" (click)="toggle(); onView()">{{ListView ? "Card view": "List View"}}</button>
 
       {{userInfo.userName}}
-      <button class="btn btn-outline-success rounded-pill" routerLink="/login" *ngIf="isLoggedIn" type="button" (click)="logOff()"> LogOff</button>
+      <button class="btn btn-sm btn-outline-success rounded-pill mx-2" routerLink="/login" *ngIf="isLoggedIn" type="button" (click)="logOff()"> LogOff</button>
       
     
     </form>
