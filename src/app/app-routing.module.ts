@@ -5,6 +5,7 @@ import { LayoutComponent } from './pages/layout/layout.component';
 import { BookingComponent } from './pages/booking/booking.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ClientComponent } from './pages/client/client.component';
+import { UserComponent } from './pages/user/user.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: 'client',
         component: ClientComponent
+      },
+      {
+        path:'User',
+        component:UserComponent
       }
     ]
   }

@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class LayoutComponent {
 
+  isLoggedIn:boolean=false;
+  userInfo:any;
+
 }
