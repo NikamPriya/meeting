@@ -12,10 +12,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ClientComponent } from './pages/client/client.component';
 import { UserComponent } from './pages/user/user.component';
 import { RoomsComponent } from './pages/rooms/rooms.component';
-import { DropdownModule } from 'primeng/dropdown';
-import { MessagesModule } from 'primeng/messages';
 import { LoaderComponent } from './pages/loader/loader.component';
-import { TableModule } from 'primeng/table';
 import { ToastrModule } from 'ngx-toastr';
 import { ToggleDirective } from './shared/directives/toggle.directive';
 
@@ -40,9 +37,6 @@ import { ToggleDirective } from './shared/directives/toggle.directive';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    DropdownModule,
-    MessagesModule,
-    TableModule,
     ToastrModule.forRoot({
       timeOut:10000,
       positionClass:'toast-bottom-right',
