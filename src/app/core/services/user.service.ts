@@ -14,8 +14,8 @@ export class UserService {
     return this.http.get(APIConstant.user.getAllusers);
   }
 
-  getAllUsersByClientId(){
-    return this.http.get(APIConstant.user.getAllUsersByClientId)
+  getAllUsersByClientId(id: number){
+    return this.http.get(APIConstant.user.getAllUsersByClientId + id)
   }
 
   getEditUserById(){
@@ -31,6 +31,6 @@ export class UserService {
   }
 
   deleteUsersById(id:number){
-    return this.http.post(APIConstant.user.deleteUsersById,id);
+    return this.http.post(APIConstant.user.deleteUsersById+id,{});
   }
 }

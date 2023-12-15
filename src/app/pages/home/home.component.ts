@@ -61,4 +61,5 @@ export class HomeComponent {
     this.divChange =!this.divChange
   }
 
+  
 }

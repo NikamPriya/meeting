@@ -12,8 +12,13 @@ import { HomeComponent } from './pages/home/home.component';
 import { ClientComponent } from './pages/client/client.component';
 import { UserComponent } from './pages/user/user.component';
 import { RoomsComponent } from './pages/rooms/rooms.component';
-import { ToggleDirective } from './shared/directives/toggle.directive';
+import { DropdownModule } from 'primeng/dropdown';
+import { MessagesModule } from 'primeng/messages';
+import { LoaderComponent } from './pages/loader/loader.component';
+import { TableModule } from 'primeng/table';
 import { ToastrModule } from 'ngx-toastr';
+import { ToggleDirective } from './shared/directives/toggle.directive';
+
 
 
 
@@ -27,6 +32,7 @@ import { ToastrModule } from 'ngx-toastr';
     ClientComponent,
     UserComponent,
     RoomsComponent,
+    LoaderComponent,
     ToggleDirective,
   ],
   imports: [
@@ -34,8 +40,16 @@ import { ToastrModule } from 'ngx-toastr';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ToastrModule.forRoot({timeOut:20000, positionClass: 'toast-top', preventDuplicates: true,
-    closeButton: true})
+    DropdownModule,
+    MessagesModule,
+    TableModule,
+    ToastrModule.forRoot({
+      timeOut:10000,
+      positionClass:'toast-bottom-right',
+      preventDuplicates: true,
+      closeButton: true
+    })
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
