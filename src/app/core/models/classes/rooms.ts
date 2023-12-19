@@ -1,5 +1,5 @@
 export class Rooms {
-  roomId: Number;
+  roomId: number;
   roomName: string;
   roomLocation: string;
   roomSeatingCapacity: Number;

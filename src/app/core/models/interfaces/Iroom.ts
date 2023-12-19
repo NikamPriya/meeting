@@ -1,5 +1,5 @@
 export interface IroomList{
-  roomId: Number;
+  roomId: number;
   roomName: string;
   roomLocation: string;
   roomSeatingCapacity: Number;
