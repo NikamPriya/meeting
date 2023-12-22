@@ -1,10 +1,10 @@
 export interface IroomList{
-  roomId: Number;
+  roomId: number;
   roomName: string;
   roomLocation: string;
-  roomSeatingCapacity: Number;
-  isroomActive: Boolean;
-  clientId: Number;
+  roomSeatingCapacity: number;
+  isroomActive: boolean;
+  clientId: number;
   createdDate: Date;
   lastUpdatetd: Date
 

@@ -1,1 +1,195 @@
-<p>booking works!</p>
+<app-loader *ngIf="isLoading"></app-loader>
+<div class="container-fluid" *ngIf="!isLoading">
+    <div class="row" style="padding-top: 70px;">
+        <div class="col-6">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Bookings</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-6 text-end">
+            <button type="button" class="btn btn-sm text-light text-end" style="background-color: #f29263;;"
+            data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" (click)=" openPopup()">
+            New Booking</button>
+        </div>
+    </div>
+    <div class="container-fluid" *ngIf="!isToggled">
+        <div class="row gutters-sm mt-2">
+            <div class="col-3  mb-3" *ngFor="let booking of bookingList" style="margin-right: -0px;">
+                <div class="card" style="width: 288px;">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <!-- <img src="https://img.icons8.com/bubbles/100/000000/user.png" alt="Admin" class="rounded-circle" width="90"> -->
+
+                            <div class="">
+                              
+                                <b>{{booking.clientName}}</b>
+                                <p>Room :{{booking.roomName}}</p>
+                                <p><i class="fa fa-calendar mx-2" aria-hidden="true"></i>{{booking.bookingDate |date:'dd-MMM-yy'}}</p>
+
+                                <p class="text-secondary "><i class="fa fa fa-clock-o mx-1" style="color: #f29263;"
+                                        aria-hidden="true"></i>Time from :- {{booking.fromTime }}
+                                       to {{booking.toTime}}</p>
+                                
+                                <button class="btn mx-2 btn-sm btn-secondary" (click)="onEditAllBooking(booking);openPopup()">Edit<i
+                                        class="fa fa-pencil mx-1" aria-hidden="true"></i></button>
+                                <button class="btn btn-sm btn-danger" (click)="onDeleteAllBooking(booking.bookingId)">Delete<i class="fa fa-ban mx-1"
+                                        aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fuid" *ngIf=" isToggled; ">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header text-center" style="background-color:#ebb59a;;">
+                        <b> User List</b>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table table-bordered table-stripped table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr No</th>
+                                            <th>Booking Date</th>
+                                            <th>From Time </th>
+                                            <th>To Time</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let booking of bookingList;let sr=index">
+                                            <td>{{sr+1}}</td>
+                                            <td>{{booking.bookingDate | date:'dd-MMM-yy'}}</td>
+                                            <td>{{booking.fromTime }}</td>
+                                            <td>{{booking.toTime}}</td>
+                                            
+
+                                            <td>
+                                                <button class="btn mx-2 btn-sm btn-secondary"
+                                                    (click)="onEditAllBooking(booking);openPopup()">Edit<i class="fa fa-pencil mx-1"
+                                                        aria-hidden="true"></i></button>
+                                                <button class="btn btn-sm btn-danger"
+                                                (click)="onDeleteAllBooking(booking.bookingId)">Delete<i class="fa fa-ban mx-1"
+                                                        aria-hidden="true"></i></button>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="parent">
+        <div class="row">
+            <div class="col-12">
+                <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" style=" padding-left: 175px; background-color:  #ebb59a;">
+                                <h5 class="modal-title">Add New Booking</h5>
+                            </div>
+                            <form #userForm="ngForm">
+                                <div class="modal-body">
+
+                                    <div class="row mx-2 ">
+                                        <div class="col-6 ">
+                                            <label>Booking Date<span class="text-danger">*</span></label>
+                                            <input type="date" class="form-control form-control-sm" #bookingDate="ngModel" required
+                                                [(ngModel)]="bookingObj.bookingDate" name="bookingDate">
+                                            <div class="text-danger" *ngIf="bookingDate.touched || bookingDate.dirty">
+                                                <span *ngIf="bookingDate.errors?.['required']">This is required</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="">Room Name<span class="text-danger">*</span></label>
+                                            <select class="form-control form-control-sm" name="roomId"
+                                                #roomName="ngModel" required [(ngModel)]="bookingObj.roomId">
+                                                <option value="Client Name">Room Name</option>
+                                                <option *ngFor="let item of roomList" [value]="item.roomId">
+                                                    {{item.roomName}}</option>
+                                            </select>
+                                            <div class="text-danger" *ngIf="roomName.touched || roomName.dirty">
+                                                <span *ngIf="roomName.errors?.['required']">This is required</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mx-2 pt-3">
+                                        <div class="col-6">
+                                            <label for="">User Name<span class="text-danger">*</span></label>
+                                            <select class="form-control form-control-sm" name="userId"
+                                                #userName="ngModel" required [(ngModel)]="bookingObj.userId">
+                                                <option value="User Name">User Name</option>
+                                                <option *ngFor="let item of userList" [value]="item.userId">
+                                                    {{item.userName}}</option>
+                                            </select>
+                                            <div class="text-danger" *ngIf="userName.touched || userName.dirty">
+                                                <span *ngIf="userName.errors?.['required']">This is required</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label>From Time<span class="text-danger">*</span></label>
+                                            <!-- <input type="time" class="form-control form-control-sm" #fromTime="ngModel" required
+                                                [(ngModel)]="bookingObj.fromTime" name="fromTime">
+                                            <div class="text-danger" *ngIf="fromTime.touched || fromTime.dirty">
+                                                <span *ngIf="fromTime.errors?.['required']">This is required</span>
+                                            </div>  -->
+                                            <select class="form-control-sm form-control" [(ngModel)]="bookingObj.fromTime" name="fromTime">
+                                                <option>Select Time</option>
+                                                <option *ngFor="let time of TimeList" [value]="time.timeId">{{time.time}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row pt-2" style="padding-left: 15px;">
+                                        <div class="col-6">
+                                            <label>To Time<span class="text-danger">*</span></label>
+                                            <!-- <input type="time" class="form-control form-control-sm" #toTime="ngModel" required
+                                                [(ngModel)]="bookingObj.toTime" name="toTime">
+                                            <div class="text-danger" *ngIf="toTime.touched || toTime.dirty">
+                                                <span *ngIf="toTime.errors?.['required']">This is required</span>
+                                            </div> -->
+                                            <select class="form-control-sm form-control" [(ngModel)]="bookingObj.toTime" name="fromTime">
+                                                <option>Select Time</option>
+                                                <option *ngFor="let time of TimeList" [value]="time.timeId">{{time.time}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="modal-footer mt-3" style="padding-right: 160px;">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <button type="button" class="btn btn-sm btn-secondary"
+                                                    (click)="closePopup()">Close <i class="fa fa-times mx"
+                                                        aria-hidden="true"></i></button>
+                                                <button class="btn btn-sm btn-success mx-3"
+                                                    (click)="onCreateAllBookings();closePopup()" [disabled]="userForm.invalid"
+                                                    *ngIf="bookingObj.bookingId==0;isLoading">Save <i
+                                                        class="fa fa-floppy-o mx" aria-hidden="true"></i></button>
+                                                <button class="btn btn-sm btn-success mx-3"
+                                                    (click)="onUpdateAllBookings();closePopup()"
+                                                    *ngIf="bookingObj.bookingId!=0;isLoading">Update<i class="fa fa-floppy-o mx-1"
+                                                        aria-hidden="true"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

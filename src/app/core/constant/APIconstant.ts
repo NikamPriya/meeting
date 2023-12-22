@@ -47,8 +47,18 @@ clientPackage: {
     createClientPackage: "https://onlinetestapi.gerasim.in/api/Meeting/AddNewClientPackage",
     updateClientPackage: "https://onlinetestapi.gerasim.in/api/Meeting/UpdateClientPackage",
     delClientPackage: "https://onlinetestapi.gerasim.in/api/Meeting/DeleteClientPackageById?id="
-}
+},  
     
     
-    
+Booking:{
+    getAllBookings:"https://onlinetestapi.gerasim.in/api/Meeting/GetAllBookings",
+    getAllBookingsByClientId:"https://onlinetestapi.gerasim.in/api/Meeting/GetAllBookingsByClientId?clientId=",
+    getAllBookingsByUserId:"https://onlinetestapi.gerasim.in/api/Meeting/GetAllBookingsByUserId?userId=",
+    createBooking:"https://onlinetestapi.gerasim.in/api/Meeting/CreateBooking",
+    updateBooking:"https://onlinetestapi.gerasim.in/api/Meeting/UpdateBooking",
+    deleteBooking:"https://onlinetestapi.gerasim.in/api/Meeting/DeleteBookingById?id=",
+    editBooking:"https://onlinetestapi.gerasim.in/api/Meeting/GetBookingById?id=1",
+    getTime:"https://onlinetestapi.gerasim.in/api/Meeting/GetTimeList"
+},
+
 }
