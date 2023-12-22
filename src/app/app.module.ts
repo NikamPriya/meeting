@@ -14,7 +14,10 @@ import { UserComponent } from './pages/user/user.component';
 import { RoomsComponent } from './pages/rooms/rooms.component';
 import { LoaderComponent } from './pages/loader/loader.component';
 import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToggleDirective } from './shared/directives/toggle.directive';
+import { PackagesComponent } from './pages/packages/packages.component';
+import { ClientPackagesComponent } from './pages/client-packages/client-packages.component';
 
 
 
@@ -31,15 +34,17 @@ import { ToggleDirective } from './shared/directives/toggle.directive';
     RoomsComponent,
     LoaderComponent,
     ToggleDirective,
+    PackagesComponent,
+    ClientPackagesComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     ToastrModule.forRoot({
-      timeOut:10000,
-      positionClass:'toast-bottom-right',
+      positionClass:'toast-center-center',
       preventDuplicates: true,
       closeButton: true
     })

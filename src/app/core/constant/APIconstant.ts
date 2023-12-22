@@ -29,4 +29,26 @@ Rooms: {
   deleteRoom: "https://onlinetestapi.gerasim.in/api/Meeting/DeleteRoomById?id=",
   GetAllRoomsByClientId:"https://onlinetestapi.gerasim.in/api/Meeting/GetAllRoomsByClientId?id="
 },
+
+Packages: {
+    getPackage: "https://onlinetestapi.gerasim.in/api/Meeting/GetAllPackages",
+    editPackage: "https://onlinetestapi.gerasim.in/api/Meeting/GetPackgeById?id=",
+    createPackages: "https://onlinetestapi.gerasim.in/api/Meeting/CreatePackage",
+    updatePackage: "https://onlinetestapi.gerasim.in/api/Meeting/UpdatePackge",
+    delPackage: "https://onlinetestapi.gerasim.in/api/Meeting/DeletePackgeById?id=",
+
+},
+
+clientPackage: {
+    getClientPAckage: "https://onlinetestapi.gerasim.in/api/Meeting/GetAllClientPackags",
+    editClientPackage: "https://onlinetestapi.gerasim.in/api/Meeting/GetClientPackageById?id=",
+    getClientPackageByClientId: "https://onlinetestapi.gerasim.in/api/Meeting/GetAllClientPackagesByClientId?id=",
+    getActivePackageByClientId: "https://onlinetestapi.gerasim.in/api/Meeting/GetActivePackageByClientId?id=",
+    createClientPackage: "https://onlinetestapi.gerasim.in/api/Meeting/AddNewClientPackage",
+    updateClientPackage: "https://onlinetestapi.gerasim.in/api/Meeting/UpdateClientPackage",
+    delClientPackage: "https://onlinetestapi.gerasim.in/api/Meeting/DeleteClientPackageById?id="
+}
+    
+    
+    
 }

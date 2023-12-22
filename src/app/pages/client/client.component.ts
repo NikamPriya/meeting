@@ -20,7 +20,6 @@ export class ClientComponent implements OnInit {
   ListView: boolean = true;
 
   displayStyle: string = "none";
-  displyModal: boolean = false;
 
   isToggled = false;
   isLoading:boolean = true;
@@ -49,15 +48,15 @@ export class ClientComponent implements OnInit {
 
     })
   }
-  // editClientData(clientId: number) {
-  //   this.clientSrv.editCli(clientId).subscribe((res: any) => {
-  //     this.clientList = res.data;
-  //   })
-  // }
-  editClientData(item: any) {
-    debugger
-    this.clientObj = item;
+  editClientData(clientId: number) {
+    this.clientSrv.editCli(clientId).subscribe((res: any) => {
+      this.clientObj = res.data;
+    })
   }
+  // editClientData(item: any) {
+  //   debugger
+  //   this.clientObj = item;
+  // }
 
 
   saveClientData() {

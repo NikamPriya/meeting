@@ -1,0 +1,218 @@
+<app-loader *ngIf="isLoading"></app-loader>
+<div class="page-content page-container- pt-4" id="page-content" *ngIf="!isLoading">
+<div class="container-fluid" >
+    <div class="row pt-5" >
+        <div class="col-6 text-start">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Client Packages</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-6 text-end">
+            <button type="button" class="btn btn-sm text-light text-end" style="background-color: #f29263;;"
+                data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" (click)=" openPopup()">
+                New Package</button>
+        </div>
+    </div>
+
+    <div class="container-fluid" *ngIf="!isToggled">
+        <div class="row gutters-sm mt-2">
+            <div class="col-3  mb-3" *ngFor="let clientpackages of clientPackageList" style="margin-right: -0px;">
+                <div class="card" style="width: 288px;">
+                    <div class="card-body" *ngIf="isCardView">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <div class="mt-1">
+                                <h5>{{clientpackages.clientName}}</h5>
+                                <p class="text-secondary mb-1">{{clientpackages.packageName }}</p>
+                                <p class="text-muted font-size-sm mb-1">Package Start From:
+                                    {{clientpackages.packageStartDate | date: 'dd/MM/YY'}}</p>
+                                <p class="text-muted font-size-sm mb-2">Package End On: {{clientpackages.packageEndDate
+                                    | date: 'dd/MM/YY'}}</p>
+
+                                <button class="btn mx-2 btn-sm btn-secondary "
+                                    (click)="onEdit(clientpackages.clientPackageId);openPopup()">Edit<i class="fa fa-pencil mx-1"
+                                        aria-hidden="true"></i></button>
+                                <button class="btn btn-sm btn-danger "
+                                    (click)="onDeleteClientPackage(clientpackages.clientPackageId)">Delete<i
+                                        class="fa fa-ban mx-1" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fuid">
+        <div class="row" *ngIf=" isToggled; ">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header text-center" style="background-color:#ebb59a;;">
+                        <b> User List</b>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table table-bordered table-stripped table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr No</th>
+                                            <th>Client Name</th>
+                                            <th>Package Name</th>
+                                            <th>Start Date</th>
+                                            <th>End Date</th>
+                                            <th>Active Package</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let clientpackages of clientPackageList;let sr=index">
+                                            <td>{{sr+1}}</td>
+                                            <td>{{clientpackages.clientName}}</td>
+                                            <td>{{clientpackages.packageName}}</td>
+                                            <td>{{clientpackages.packageStartDate | date:'dd/MM/yy'}}</td>
+                                            <td>{{clientpackages.packageEndDate | date:'dd/MM/yy'}}</td>
+                                            <td>{{clientpackages.isActive}}</td>
+                                            <td>
+                                                <button class="btn mx-2 btn-sm btn-secondary"
+                                                    (click)="onEdit(clientpackages.clientPackageId);openPopup()">Edit<i
+                                                        class="fa fa-pencil mx-1" aria-hidden="true"></i></button>
+                                                <button class="btn btn-sm btn-danger mx-2"
+                                                    (click)="onDeleteClientPackage(clientpackages.clientPackageId)">Delete<i
+                                                        class="fa fa-ban mx-1" aria-hidden="true"></i></button>
+
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                    data-target=".bd-example-modal-sm" 
+                                                    (click)=" openModal();getClientdata(clientpackages.clientId)">History</button>
+
+                                                <div class="modal" tabindex="-1" role="dialog"
+                                                    [ngStyle]="{'display':displayStyle1}">
+                                                    <div class="modal-dialog " role="document">
+                                                        <div class="modal-content "
+                                                            *ngFor="let client of clientAllPackageList">
+                                                            <div class="modal-body">
+                                                                Package History
+                                                                <p>{{client.packageName}}</p>
+                                                                <p>{{client.packageStartDate}}</p>
+                                                                <p>{{client.packageEndDate}}</p>
+                                                                
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="close"
+                                                                        (click)="closeModal()" data-dismiss="modal"
+                                                                        aria-label="Close"><i class="fa fa-times mx"
+                                                                            aria-hidden="true"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+    <div class="parent">
+        <div class="row">
+            <div class="col-12">
+                <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" style=" padding-left: 100px; background-color:  #ebb59a;">
+                                <h5 class="modal-title">Add New Client Package</h5>
+                            </div>
+                            <form #userForm="ngForm">
+                                <div class="modal-body">
+
+                                    <div class="row mx-2 ">
+                                        <div class="col-6">
+                                            <label for="">Company Name<span class="text-danger">*</span></label>
+                                            <select class="form-control form-control-sm" name="clientId"
+                                                #companyName="ngModel" required [(ngModel)]="clientPackageObj.clientId">
+                                                <option value="Client Name">Company Name</option>
+                                                <option *ngFor="let item of clientList" [value]="item.clientId">
+                                                    {{item.companyName | titlecase}}</option>
+                                            </select>
+                                            <div class="text-danger" *ngIf="companyName.touched || companyName.dirty">
+                                                <span *ngIf="companyName.errors?.['required']">This is required</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <label for="">Package<span class="text-danger">*</span></label>
+                                            <select class="form-control form-control-sm" name="packageId"
+                                                #packageName="ngModel" required
+                                                [(ngModel)]="clientPackageObj.packageId">
+                                                <option value="Client Name">Select Package</option>
+                                                <option *ngFor="let item of packagesList" [value]="item.packageId">
+                                                    {{item.packageName}}</option>
+                                            </select>
+                                            <div class="text-danger" *ngIf="packageName.touched || packageName.dirty">
+                                                <span *ngIf="packageName.errors?.['required']">This is required</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mx-2 pt-3">
+                                        <div class="col-6 ">
+                                            <label>Package Start Date<span class="text-danger">*</span></label>
+                                            <input type="date" #packageStartDate="ngModel" required
+                                                name="packageStartDate" [(ngModel)]="clientPackageObj.packageStartDate"
+                                                class="form-control form-control-sm">
+                                            <div class="text-danger"
+                                                *ngIf="packageStartDate.touched || packageStartDate.dirty">
+                                                <span *ngIf="packageStartDate.errors?.['required']">Required
+                                                    Field</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 ">
+                                            <label>Package End Date<span class="text-danger">*</span></label>
+                                            <input type="date" #packageEndDate="ngModel" required name="packageEndDate"
+                                                [(ngModel)]="clientPackageObj.packageEndDate"
+                                                class="form-control form-control-sm">
+                                            <div class="text-danger"
+                                                *ngIf="packageEndDate.touched || packageEndDate.dirty">
+                                                <span *ngIf="packageEndDate.errors?.['required']">Required Field</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 mx-4 pt-3">
+                                            <input type="checkbox" name="isActive"
+                                                [(ngModel)]="clientPackageObj.isActive">Is Active
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer mt-3" style="padding-right: 90px;">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <button type="button" class="btn btn-sm btn-secondary"
+                                                    (click)="closePopup()">Close
+                                                    <i class="fa fa-times mx" aria-hidden="true"></i></button>
+                                                <button class="btn btn-sm btn-success mx-3"
+                                                    (click)="onSaveClientPackage();closePopup()"
+                                                    [disabled]="userForm.invalid"
+                                                    *ngIf="clientPackageObj.clientPackageId==0;isLoading">Save <i
+                                                        class="fa fa-floppy-o mx" aria-hidden="true"></i></button>
+                                                <button class="btn btn-sm btn-success mx-3"
+                                                    (click)="onUpdateClientPackage();closePopup()"
+                                                    *ngIf="clientPackageObj.clientPackageId!=0">Update<i
+                                                        class="fa fa-floppy-o mx-1" aria-hidden="true"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

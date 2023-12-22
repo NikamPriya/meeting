@@ -1,6 +1,6 @@
 <app-loader *ngIf="isLoading"></app-loader>
 
-<div class="page-content page-container- " id="page-content" *ngIf="!isLoading">
+<div class="page-content page-container- pt-3" id="page-content" *ngIf="!isLoading">
     <div class="container-fluid">
         <div class="row  pt-5 ">
             <div class="col-6">
@@ -48,9 +48,9 @@
                                 </div>
                                 <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600"></h6>
                                 <div class="row">
-                                    <div class="col-6 mb-1 text-start">
+                                    <div class="col-6  text-start">
                                         <button class="btn  btn-sm btn-secondary"
-                                            (click)="editClientData(data); openPopup()">Edit<i class="fa fa-pencil mx-1"
+                                            (click)="editClientData(data.clientId); openPopup()">Edit<i class="fa fa-pencil mx-1"
                                             aria-hidden="true"></i></button>
                                         </div>
                                     <div class="col-6 text-start">
@@ -95,7 +95,7 @@
                                 <td>{{data.contactNo}}</td>
                                 <td>
                                     <button class="btn mx-3 btn-sm btn-secondary"
-                                        (click)="editClientData(data); openPopup()">Edit<i class="fa fa-pencil mx-1"
+                                        (click)="editClientData(data.clientId); openPopup()">Edit<i class="fa fa-pencil mx-1"
                                             aria-hidden="true"></i></button>
                                     <button class="btn btn-sm btn-danger"
                                         (click)="DeleteClientData(data.clientId)">Delete<i class="fa fa-ban mx-1"
