@@ -24,11 +24,11 @@
         <div class="row gutters-sm mt-2">
             <div class="col-3  mb-3" *ngFor="let user of userList" style="margin-right: -0px;">
                 <div class="card" style="width: 288px;">
-                    <div class="card-body" *ngIf="isCardView">
+                    <div class="card-body" >
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="../../../assets/user img.png" alt="Admin" class="rounded-circle" width="90">
+                            <img src="https://img.icons8.com/bubbles/100/000000/user.png" alt="Admin" class="rounded-circle" width="90">
                             <div class="mt-3">
-                                <h5>{{user.userName}}</h5>
+                                <b>{{user.userName}}</b>
                                 <p class="text-secondary mb-1">{{user.clientName }}</p>
                                 <p class="text-muted font-size-sm">{{user.role}}</p>
                                 <button class="btn mx-2 btn-sm btn-secondary" (click)="onEdit(user);openPopup()">Edit<i
@@ -73,7 +73,7 @@
 
                                             <td>
                                                 <button class="btn mx-2 btn-sm btn-secondary"
-                                                    (click)="onEdit(user)">Edit<i class="fa fa-pencil mx-1"
+                                                    (click)="onEdit(user);openPopup()">Edit<i class="fa fa-pencil mx-1"
                                                         aria-hidden="true"></i></button>
                                                 <button class="btn btn-sm btn-danger"
                                                     (click)="ondeleteUser(user.userId)">Delete<i class="fa fa-ban mx-1"
@@ -161,7 +161,7 @@
                                                         class="fa fa-floppy-o mx" aria-hidden="true"></i></button>
                                                 <button class="btn btn-sm btn-success mx-3"
                                                     (click)="onUpsateUser();closePopup()"
-                                                    *ngIf="userObj.userId!=0">Update<i class="fa fa-floppy-o mx-1"
+                                                    *ngIf="userObj.userId!=0;isLoading">Update<i class="fa fa-floppy-o mx-1"
                                                         aria-hidden="true"></i></button>
                                             </div>
                                         </div>

@@ -106,7 +106,9 @@ export class UserComponent implements OnInit {
   }
 
   onUpsateUser() {
+    this.isLoading = true;
     this.userSrv.updateUser(this.userObj).subscribe((res: any) => {
+      this.isLoading = false;
       if (res.result) {
         alert("User Updated Successfully");
 

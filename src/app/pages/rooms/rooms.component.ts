@@ -22,6 +22,7 @@ export class RoomsComponent {
   isSpinner: boolean = false;
   isLoading:boolean = true;
   loggedInUserdata: any;
+  
 
   private subscription: Subscription = new Subscription;
 
@@ -91,7 +92,9 @@ export class RoomsComponent {
   }
 
   onupdateRooms(){
+    this.isLoading = true;
     this.roomSrv.updateRoom(this.roomObj).subscribe((res:any)=>{
+      this.isLoading = false;
       if(res.result){
         alert("Room Updated Successfully");
         this.ongetAllRooms();
