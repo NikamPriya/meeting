@@ -46,7 +46,7 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    debugger;
     if (this.loggedinuserdata.role == 'Client') {
       this.userObj.clientId == this.loggedinuserdata.clientId
       this.onGetAllUsersByClientId();

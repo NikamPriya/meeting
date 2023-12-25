@@ -18,11 +18,11 @@ export class LoginComponent implements OnInit{
     
   }
   login(){
+    debugger;
     this.loginSrv.onLogin(this.loginObj).subscribe((res:any)=>{
       if(res.result){
-        alert('Login Successfully')
         this.router.navigateByUrl('home')
-        localStorage.setItem('loginDetails', JSON.stringify(res.data))
+        localStorage.setItem('loginDetails', JSON.stringify(res.data.userName))
         this.router.navigateByUrl('/home')
         localStorage.setItem('loginDetails', JSON.stringify(res))
       }else{

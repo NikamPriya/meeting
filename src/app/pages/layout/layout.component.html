@@ -27,18 +27,18 @@
       </form>
     </div>
     <button class="btn btn-sm btn-outline-success rounded-pill" (click)="toggle(); onView()">{{ListView ? "Card view": "List View"}}</button> -->
-    <!-- <button *ngIf="!isLoggedIn" routerLink="login" class="btn btn-outline-primary round-button mx-2" type="button">Login</button> -->
+<!-- <button *ngIf="!isLoggedIn" routerLink="login" class="btn btn-outline-primary round-button mx-2" type="button">Login</button> -->
 
-    <!-- <button  class="btn btn-link " type="button">{{userInfo?.userName}}</button>
+<!-- <button  class="btn btn-link " type="button">{{userInfo?.userName}}</button>
     <button  (click)="logOff()" class="btn btn-success round-button" type="button">LogOff</button> -->
 
-    <!-- <a href="#" class="btn  btn-sm btn-outline-success rounded-pill">
+<!-- <a href="#" class="btn  btn-sm btn-outline-success rounded-pill">
       <span class="glyphicon glyphicon-log-out">Log out</span> -->
-    <!-- </a> -->
-  <!-- </div>
+<!-- </a> -->
+<!-- </div>
 </nav> -->
 <!-- <div class="main1">
-  <div class="side-nav">
+  <div class="side-nav" *ngIf="expanded" @slidein>
       <div id="mySidenav" class="sidenav">
           <ul class="=nav-list" style="list-style-type: none">
               <li class="nav-list-item" *ngFor="let item of list">
@@ -52,32 +52,33 @@
   </div>
 </div> -->
 <div class="navbar navbar-expand px-2" style=" background-color: #272c4a;">
-  <div class="side-nav-button p-2 me-3 text-light">
-      <i class="fa fa-bars" aria-hidden="true"></i>
+  <div class="side-nav-button p-2 me-3 text-light" (click)="expanded =!expanded">
+    <i class="fa fa-bars" aria-hidden="true"></i>
   </div>
   <a class="navbar-brand px-2 text-light" routerLink="home"> Home</a>
   <a class="navbar-brand px-2 text-light" routerLink="Booking" *ngIf="userInfo?.role=='Client'"> Booking</a>
   <a class="navbar-brand px-2 text-light" routerLink="client"> Client</a>
-  <a class="navbar-brand px-2 text-light" routerLink="packages"> Packages</a>  
-  <a class="navbar-brand px-2 text-light" routerLink="client-packages"> Client-Packages</a> 
+  <a class="navbar-brand px-2 text-light" routerLink="packages"> Packages</a>
+  <a class="navbar-brand px-2 text-light" routerLink="client-packages"> Client-Packages</a>
   <a class="navbar-brand px-2 text-light" routerLink="User"> Users</a>
   <a class="navbar-brand px-3 text-light" routerLink="room"> Room</a>
   <a class="navbar-brand px-3 text-light" routerLink="booking"> Booking</a>
 
-  
+
   <!-- <div class="navbar-collapse">
       <ul class="navbar-nav me-auto"></ul>
   </div> -->
-  <div class="search-container  "  >
+  <div class="search-container  ">
     <form action="/action_page.php d-flex">
       <input type="text" placeholder="Search.." name="search">
       <button type="button"><i class="fa fa-search"></i></button>
-      <button class="btn btn-sm btn-outline-success rounded-pill ms-2" (click)="toggle(); onView()">{{ListView ? "Card view": "List View"}}</button>
+      <button class="btn btn-sm btn-outline-success rounded-pill ms-2" (click)="toggle(); onView()">{{ListView ? "Card
+        view": "List View"}}</button>
 
       {{userInfo.userName}}
-      <button class="btn btn-sm btn-outline-success rounded-pill mx-2" routerLink="/login" *ngIf="isLoggedIn" type="button" (click)="logOff()"> LogOff</button>
-      
-    
+      <button class="btn btn-sm btn-outline-success rounded-pill mx-2" routerLink="/login" *ngIf="isLoggedIn"
+        type="button" (click)="logOff()"> LogOff</button>
+
     </form>
   </div>
 
@@ -85,4 +86,4 @@
 
 
 
-  <router-outlet></router-outlet>
+<router-outlet></router-outlet>

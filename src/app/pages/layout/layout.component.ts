@@ -1,12 +1,28 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/core/services/login.service';
 import { ToggleService } from 'src/app/core/services/toggle.service';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.css']
+  styleUrls: ['./layout.component.css'],
+  animations: [
+    trigger('slidein', [
+      transition(':enter', [
+        // when ngif has true
+        style({ transform: 'translateX(-100%)' }),
+        animate(250, style({ transform: 'translateX(0)' }))
+      ]),
+      transition(':leave', [
+        // when ngIf has false
+        animate(250, style({ transform: 'translateX(-100%)' }))
+      ])
+    ])
+  ]
 })
+
 export class LayoutComponent {
   list=[
     {
@@ -40,13 +56,14 @@ export class LayoutComponent {
       icon: 'fa fa-home'
     },
   ]
+  expanded: boolean=true;
 
   ListView:boolean=false;
 
   isLoggedIn: boolean = false;
   userInfo?: any;
 
-  constructor(private togglesrv:ToggleService, private loginsrv:LoginService){
+  constructor(private togglesrv:ToggleService, private loginsrv:LoginService, private router:Router){
     const userData = localStorage.getItem('loginDetails')
     if(userData == null) {
       this.isLoggedIn =false;
@@ -57,8 +74,7 @@ export class LayoutComponent {
   }
 
   logOff(){
-    localStorage.removeItem('loginDetails');
-    this.isLoggedIn =false
+    this.router.navigateByUrl("");
   }
   toggle(){
    this.togglesrv.toggleSubject.next(true);

@@ -113,10 +113,10 @@
                                             </div>
                                         </div>
                                         <div class="col-6" *ngIf="loggedinuserdata.role !== 'Client'">
-                                            <label for="">Company Name<span class="text-danger">*</span></label>
+                                            <label for="">Select Company<span class="text-danger">*</span></label>
                                             <select class="form-control form-control-sm" name="clientId"
                                                 #companyName="ngModel" required [(ngModel)]="userObj.clientId">
-                                                <option value="Client Name">Company Name</option>
+                                                <option value="Client Name">Select Company</option>
                                                 <option *ngFor="let item of clientList" [value]="item.clientId">
                                                     {{item.companyName}}</option>
                                             </select>
@@ -139,7 +139,7 @@
                                             <select class="form-control form-control-sm" #role="ngModel" required
                                                 [(ngModel)]="userObj.role" name="role">
                                                 <option value="Select Role">Select Role</option>
-                                                <option value="Client">Client</option>
+                                                <option value="Client">Client </option>
                                                 <option value="ClientEmployee">Client Employee</option>
                                             </select>
                                             <div class="text-danger" *ngIf="role.touched || role.dirty">

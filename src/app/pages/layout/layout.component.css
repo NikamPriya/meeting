@@ -141,6 +141,13 @@ body {
 nav{
   height: 100%;
 }
+.side-nav {
+  /* position: relative; */
+  width: 250px;
+  height: 100vh;
+  background:#1b203d;
+  color: white;
+}
 .side-nav-button{
   display :flex;
   justify-content: center;
@@ -190,11 +197,10 @@ border-radius: 30%;
 } 
 
 .main1{
-  position: absolute;
-  width: 100%;
-  top: 3rem;
-  z-index: 1;
-}
+    display: flex;
+    flex-direction: row;
+  }
+
 .side-nav{
   position: absolute;
   /* left: 0rem; */
@@ -212,13 +218,15 @@ border-radius: 30%;
   padding-right: 10px;
 }
 
-.nav-list-item span{
+.nav-list-item span a:link{
   text-transform: capitalize;
-  /* padding-left: 20px; */
+  padding-left: 20px;
+  text-decoration: none;
+text-decoration-color: white;
 }
 .nav-list-item:hover{
   background-color: rgb(202, 188, 188);
-  color: black;
+  color: white;
   height: 20px;
 
 }

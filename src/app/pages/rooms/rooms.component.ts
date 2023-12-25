@@ -73,6 +73,7 @@ export class RoomsComponent {
   }
 
   oncreatRooms(){
+    debugger;
     this.isLoading = true;
     if (this.loggedInUserdata.role == 'Client') {
       this.roomObj.clientId = this.loggedInUserdata.clientId
