@@ -147,7 +147,6 @@ export class UserComponent implements OnInit {
     this.displayStyle = 'none';
     this.userObj = new user()
   }
-
   onView() {
     this.ListView = !this.ListView
   }
